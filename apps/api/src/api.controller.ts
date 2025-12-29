@@ -1,11 +1,12 @@
-import { BadRequestException, Controller, Post, Query, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Controller, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { GenerateImages, ImageType } from 'contracts/converter';
+import { GenerateImages } from 'contracts/converter';
 import { RMQService } from 'nestjs-rmq';
 import { FilesService } from './files.service';
 import { FileElementResponse } from './interfaces/file-element.reposonse';
 import { MFile } from './interfaces/mfile.class';
 import { PayloadDto } from './interfaces/payload.dto';
+
 
 @Controller()
 export class ApiController {
