@@ -1,17 +1,17 @@
-# базовый образ
-FROM node:14-alpine
-# устанавливаем рабочую директорию
+FROM node:14-alpine as build
 WORKDIR /opt/app
-# копируем все *.json - в данном случае пререквизит для установки зависимостей из package.json
 ADD *.json ./
-# устанавливаем зависимости
 RUN npm install
-# копируем все в рабочую директорию
 ADD . .
-# собираем проект
 RUN npm run build api
-# запускаем проект
-CMD ["node", "./dist/apps/api/main.js"]
+
+# 2 шаг -
+FROM node:14-alpine
+WORKDIR /opt/app
+ADD package.json ./
+RUN npm install --only=prod
+COPY --from=build /opt/app/dist/apps/api ./dist/
+CMD ["node", "./dist/main.js"]
 
 
 # пояснения для самых маленьких :)
