@@ -1,0 +1,62 @@
+# строки
+name: Vlad
+name2: "test /n"
+name3: 'Dima'
+
+#числа
+age: 30
+version: 1.75
+
+# комментарий
+
+#boolean
+isDev: true
+isHz: false
+
+isDev2: on
+isHz2: false
+
+isDev3: yes
+isHz3: no
+
+# объекты
+user:
+  name: Vasya
+  age: 30
+
+
+#  списки
+#users:
+#  - name: Dima
+#    age: 20
+#  - nama: Vlad
+#    age: 33
+
+#списки позволяют писать без отступов
+users:
+  - name: Dima
+    age: 20
+  - nama: Vlad
+    age: 33
+
+# списки без ключей
+userList:
+  - Vasya
+  - Anna
+
+# json внутри yaml - валидно
+versions: [ 1.7,6 ]
+versions2: [ "1.7",6 ]
+
+object": {
+  "key": 7
+}
+
+multiline: |
+  Эта строка будет
+  отображаться в несколько
+  строк
+
+singleline: >
+ Эта очень длинная строка,
+  которая будет вылезать за край...
