@@ -1,6 +1,7 @@
 version: "3.8"
 services:
   api:
+    profiles: ["backend"]
     build:
       context: .
       dockerfile: apps/api
@@ -13,13 +14,14 @@ services:
     depends_on:
       - rmq
   rmq:
+    profiles: ["queue"]
     image: rabbitmq:3-management
     restart: always
     networks:
       - myNetwork
     environment:
-        RABBITMQ_DEFAULT_USER: admin
-        RABBITMQ_DEFAULT_PASS: admin
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
 networks:
   myNetwork:
     driver: bridge
