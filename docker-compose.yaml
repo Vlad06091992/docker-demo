@@ -4,9 +4,9 @@ services:
     profiles: ["backend"]
     build:
       context: .
-      dockerfile: apps/api
+      dockerfile: apps/api/Dockerfile
     restart: always
-    container_name: api
+    container_name: "${NAME}"
     volumes:
       - .env:/opt/app/.env
     networks:
@@ -19,6 +19,8 @@ services:
     restart: always
     networks:
       - myNetwork
+#    env_file:
+#      - .env  # или путь к вашему файлу
     environment:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: admin
