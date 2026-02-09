@@ -31,28 +31,33 @@ function App() {
 		const file = response as FileElementResponse;
 		setResult(file.url);
 	};
-
+//@ts-ignore
 	return (
 		<div className="app">
 			<div></div>
+      {/*//@ts-ignore*/}
 			<Panel bordered>
 				<h1 className="header">Конвертер изображений</h1>
 				<div className="options">
 					<div>
 						<label>Ширина</label>
+            {/*//@ts-ignore*/}
 						<InputNumber value={payload.width} min={0} size="md" onChange={e => setPayload(m => ({ ...m, width: Number(e) }))} />
 					</div>
 					<div>
 						<label>Высота</label>
+            {/*//@ts-ignore*/}
 						<InputNumber value={payload.height} min={0} size="md" onChange={e => setPayload(m => ({ ...m, height: Number(e) }))} />
 					</div>
 					<div>
 						<label>Качество</label>
+            {/*//@ts-ignore*/}
 						<InputNumber value={payload.quality} min={0} max={100} step={0.1} size="md" onChange={e => setPayload(m => ({ ...m, quality: Number(e) }))} />
 					</div>
 					<div>
 						<label>Формат</label>
-						<SelectPicker
+            {/*//@ts-ignore*/}
+            <SelectPicker
 							style={{ width: '100%' }}
 							data={format}
 							value={payload.type}
@@ -60,7 +65,7 @@ function App() {
 						/>
 					</div>
 				</div>
-
+        {/*//@ts-ignore*/}
 				<Uploader
 					draggable
 					fileListVisible={false}
@@ -69,6 +74,7 @@ function App() {
 					onSuccess={uploadedFile}
 				>
 					<button style={{ width: '100%', marginTop: 10, height: 200 }} >
+            {/*//@ts-ignore*/}
 						<Icon icon='camera-retro' size="lg" />
 					</button>
 				</Uploader>
