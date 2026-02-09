@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   api:
-    profiles: ["backend"]
+    # profiles: ["backend"]
     build:
       context: .
       dockerfile: apps/api/Dockerfile
@@ -13,8 +13,16 @@ services:
       - myNetwork
     depends_on:
       - rmq
+  app:
+    profiles: [ "frontend" ]
+    build:
+      context: .
+      dockerfile: apps/app/Dockerfile
+    restart: always
+    ports:
+      - "3001:3001"
   rmq:
-    profiles: ["queue"]
+   # profiles: ["queue"]
     image: rabbitmq:3-management
     restart: always
     networks:
