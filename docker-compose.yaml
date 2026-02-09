@@ -2,6 +2,9 @@ version: "3.8"
 services:
   api:
     # profiles: ["backend"]
+    # это для переменных внутри контейнера, не для самого Docker Compose
+    env_file:
+      - .env  # или путь к вашему файлу
     build:
       context: .
       dockerfile: apps/api/Dockerfile
@@ -27,11 +30,40 @@ services:
     restart: always
     networks:
       - myNetwork
-#    env_file:
-#      - .env  # или путь к вашему файлу
+    # это для переменных внутри контейнера, не для самого Docker Compose
+    env_file:
+      - .env  # или путь к вашему файлу
     environment:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: admin
 networks:
   myNetwork:
     driver: bridge
+
+
+#    version: "3.8"
+#    services:
+#      api:
+#        #    profiles: ["backend"]
+#        build:
+#          context: .
+#          dockerfile: apps/api/Dockerfile
+#        restart: always
+#        container_name: "${NAME}"
+#        volumes:
+#          - .env:/opt/app/.env
+#        networks:
+#          - myNetwork
+#        depends_on:
+#          - rmq
+#      rmq:
+#        #   profiles: ["queue"]
+#        image: rabbitmq:3-management
+#        restart: always
+#        networks:
+#          - myNetwork
+#        #    env_file:
+#        #      - .env  # или путь к вашему файлу
+#        environment:
+#          RABBITMQ_DEFAULT_USER: admin
+#          RABBITMQ_DEFAULT_PASS: admin
