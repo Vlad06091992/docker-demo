@@ -1,44 +1,62 @@
 version: "3.8"
 services:
-#  api:
-#    # profiles: ["backend"]
-#    # это для переменных внутри контейнера, не для самого Docker Compose
-#    env_file:
-#      - .env  # или путь к вашему файлу
-#    build:
-#      context: .
-#      dockerfile: apps/api/Dockerfile
-#    restart: always
-#    container_name: "${NAME}"
-#    volumes:
-#      - .env:/opt/app/.env
-#    networks:
-#      - myNetwork
-#    depends_on:
-#      - rmq
+  api:
+    profiles: ["backend"]
+    # это для переменных внутри контейнера, не для самого Docker Compose
+    env_file:
+      - .env.compose  # или путь к вашему файлу
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: always
+    container_name: "${API_NAME}"
+    volumes:
+      - .env:/opt/app/.env
+    networks:
+      - myNetwork
+    depends_on:
+      - rmq
+    ports:
+      - "3002:3000"
+  converter:
+    profiles: ["backend"]
+    # это для переменных внутри контейнера, не для самого Docker Compose
+    env_file:
+      - .env.compose  # или путь к вашему файлу
+    build:
+      context: .
+      dockerfile: apps/converter/Dockerfile
+    restart: always
+    container_name: "${CONVERTER_NAME}"
+    volumes:
+      - .env:/opt/app/.env
+    networks:
+      - myNetwork
+    depends_on:
+      - rmq
   app:
     profiles: [ "frontend" ]
     build:
       context: .
       dockerfile: apps/app/Dockerfile
-#    restart: always
+    restart: always
     ports:
       - "3001:80"
-#  rmq:
-#   # profiles: ["queue"]
-#    image: rabbitmq:3-management
-#    restart: always
-#    networks:
-#      - myNetwork
-#    # это для переменных внутри контейнера, не для самого Docker Compose
-#    env_file:
-#      - .env  # или путь к вашему файлу
-#    environment:
-#      RABBITMQ_DEFAULT_USER: admin
-#      RABBITMQ_DEFAULT_PASS: admin
-#networks:
-#  myNetwork:
-#    driver: bridge
+  rmq:
+    profiles: ["queue"]
+    image: rabbitmq:3-management
+    restart: always
+    networks:
+      - myNetwork
+    # это для переменных внутри контейнера, не для самого Docker Compose
+    env_file:
+      - .env  # или путь к вашему файлу
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+networks:
+  myNetwork:
+    driver: bridge
 
 
 #    version: "3.8"
